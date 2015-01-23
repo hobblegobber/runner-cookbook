@@ -7,11 +7,13 @@
 # All rights reserved - Do Not Redistribute
 #
 
-remote_file "/tmp" do
+remote_file "/tmp/runner.deb" do
   source "https://s3-eu-west-1.amazonaws.com/downloads-packages/ubuntu-14.04/gitlab-runner_5.1.0~pre.omnibus.1-1_amd64.deb"
 end
 
-execute "sudo dpkg -i gitlab-runner_5.1.0~pre.omnibus.1-1_amd64.deb"
+execute "sudo dpkg -i runner.deb" do
+  cwd "/tmp"
+end
 
 execute "sudo useradd -s /bin/false -m -r gitlab-runner"
 
