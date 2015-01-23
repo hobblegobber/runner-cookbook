@@ -17,8 +17,8 @@ end
 
 execute "sudo useradd -s /bin/false -m -r gitlab-runner"
 
-execute "sudo /opt/gitlab-runner/bin/setup -C /home/gitlab-runner"
+execute "sudo CI_SERVER_URL=#{node['runner']['ci-url']} REGISTRATION_TOKEN=#{node['runner']['token']} /opt/gitlab-runner/bin/setup -C /home/gitlab-runner"
 
-execute "sudo CI_SERVER_URL=#{node['runner']['ci-url']} REGISTRATION_TOKEN=#{node['runner']['token']} cp /opt/gitlab-runner/doc/install/upstart/gitlab-runner.conf /etc/init/"
+execute "sudo cp /opt/gitlab-runner/doc/install/upstart/gitlab-runner.conf /etc/init/"
 
 execute "sudo service gitlab-runner start"
